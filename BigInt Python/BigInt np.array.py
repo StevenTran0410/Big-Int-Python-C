@@ -419,15 +419,20 @@ class UintN:
                 for r in range(1, num_exponent):
                     args_2.append((UintN(list_base[i]), UintN(2**r)*d, self))
 
-                drones_2 = pool.starmap_async(
-                    self.ModularExponentiation, args_2)
-                base_2 = drones_2.get()
-                for r in range(0, num_exponent - 1):
-                    if base_2[r] != comparision and base_2[r] != 1:
-                        flag = False
-                    else:
-                        flag = True
-                        break
+                if len(args_2):
+                    drones_2 = pool.starmap_async(
+                        self.ModularExponentiation, args_2)
+                    base_2 = drones_2.get()
+                    for r in range(0, num_exponent - 1):
+                        if base_2[r] != comparision and base_2[r] != 1:
+                            flag = False
+                        else:
+                            flag = True
+                            break
+                    if not flag:
+                        return flag
+                else:
+                    return False
         return flag
 
 

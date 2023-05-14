@@ -393,7 +393,7 @@ class UintN:
 
                 for i in range(len(index_wrong)):
                     for r in range(0, num_exponent - 1):
-                        if base_2[i + r] != comparision and base_2[i + r] != 1:
+                        if base_2[i * (num_exponent - 1) + r] != comparision and base_2[i * (num_exponent - 1) + r] != 1:
                             flag = False
                         else:
                             flag = True
